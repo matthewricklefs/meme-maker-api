@@ -83,6 +83,16 @@ def update_meme(id):
   db.session.commit()
   return meme_schema.jsonify(meme)
 
+#DELETE
+@app.route("/delete-meme/<id>", methods=["DELETE"])
+def delete_meme(id):
+  meme = Meme.query.get(id)
+
+  db.session.delete(meme)
+  db.session.commit()
+
+  return jsonify({"message": "Record Deleted Successfully"})
+
 
 if __name__ == "__main__":
   app.run(debug=True)
